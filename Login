@@ -1,0 +1,41 @@
+package TestCases;
+
+import java.io.IOException;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+//import PageObjects.CategoryPage;
+import PageObjects.LoginPage;
+
+public class Login extends BaseClass
+{
+	@Test
+	public void loginTest() throws IOException
+	{
+		logger.info("URL is opened");
+		LoginPage objlp=new LoginPage(driver);
+		
+		objlp.login(userName, password);
+		logger.info("Sent username and password");
+		
+		objlp.clickSubmit();
+		logger.info("Clicked on login button");
+		
+		if(driver.getTitle().equals("Brilliant WMS"))
+		{
+			Assert.assertTrue(true);
+			logger.info("login Test Passed");
+		}
+		else
+		{
+			captureScreen(driver,"loginTest");
+			Assert.assertTrue(false);
+			logger.info("login Test Failed");
+			
+		}
+	}
+}
+	
+	
+
